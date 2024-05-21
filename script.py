@@ -14,15 +14,15 @@ for file in files_downloads:
     deleted = cleanFile(file)
 
     if not deleted:
-        destination = findDest(file)
+        destination = findDest(file, "Downloads")
         moveFile(file, destination)
 
 
 for file in files_documents:
-    file = DOWNLOADS_DIR + "/" + file
+    file = DOCUMENTS_DIR + "/" + file
 
     deleted = cleanFile(file)
 
     if not deleted:
-        destination = findDest(file)
+        destination = findDest(file, "Documents")
         moveFile(file, destination)

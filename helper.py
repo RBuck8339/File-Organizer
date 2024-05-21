@@ -3,6 +3,7 @@ import string
 import shutil
 
 DOWNLOADS_DIR = "C:/Users/ronan/Downloads"
+DOCUMENTS_DIR = "C:/Users/ronan/OneDrive/Documents"
 SCHOOL_DIR = 'C:/Users/ronan/Downloads/School'
 
 
@@ -22,11 +23,15 @@ TO_DELETE = ["RonanBuck Resume ("]
 
 HOUSING = ["lease", "Retreat"]
 
+SETUP_INSTALLERS = ["Setup", "Installer"]
+
+MODS = ["Elden", "Mod", "Pokemon", "randomizer", "Randomizer"]
+
 def createFolder(path: string):
     pass
 
 
-def findDest(file):
+def findDest(file, type):
     for semester in CLASSES_DICT.keys():
         for course in CLASSES_DICT[semester]:
             if course in file:
@@ -44,12 +49,24 @@ def findDest(file):
     if "CoverLetter" in file:
         return "C:/Users/ronan/Downloads/Cover Letters"
             
-    return "Not_School"
+    for item in MODS:
+        if item in file:
+            return "C:/Users/ronan/Downloads/Mods"
+        
+    for item in SETUP_INSTALLERS:
+        if item in file:
+            return "C:/Users/ronan/Downloads/SetupInstallers"
+    
+
+    return "Not_Available"
         
 
 def moveFile(file, dest):
-    if dest != "Not_School":
-        shutil.move(file, dest)
+    if dest != "Not_Available":
+        try:
+            shutil.move(file, dest)
+        except:
+            cleanFile(file)
 
 
 def cleanFile(file):
